@@ -130,7 +130,7 @@
         // method that we will use to update the control based on feature properties passed
         info.update = function (props) {
             this._div.innerHTML = '<h4>District Profile</h4>' + (props ?
-                '<b>Name: ' + props.district + '</b><br /> Total Population:' + props.pop_total+'<br/> Female Population:'+props.pop_female+'<br/> Male Population:'+props.pop_male :
+                '<b>Name: ' + props.district + '</b><br /> Total Population:' + props.pop_total+'<br/> Female Population:'+props.pop_female+'<br/> Male Population:'+props.pop_male+'<br/> Area:'+props.area_sq_km+'Km<sup>2</sup>' :
                 'Hover over a district');
         };
 
@@ -145,7 +145,7 @@
             var div = L.DomUtil.create('div', 'info legend'),
                 grades = [0, 10, 20, 50, 100, 200, 500, 1000],
                 labels = [];
-                div.innerHTML = "<b>Legend</b><br><p>Population Density (People/meters<sup>2</sup>)</p>"
+                div.innerHTML = "<b>Legend</b><br><p>Population Density (People/Km<sup>2</sup>)</p>"
 
             // loop through our density intervals and generate a label with a colored square for each interval
             for (var i = 0; i < grades.length; i++) {
