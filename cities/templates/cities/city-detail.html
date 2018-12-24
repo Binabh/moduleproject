@@ -1,0 +1,19 @@
+{% load leaflet_tags %}
+{% leaflet_css %}
+{% leaflet_js %}
+
+<div>
+    <center> <h2>{{ city.name }}</h2></center>
+    {% leaflet_map "main" callback="map_init" %}
+</div>
+
+<script type="text/javascript">
+    function map_init(map, options) {
+        // get point lat and lon
+        var lon = "{{ city.geometry.x }}";
+        var lat = "{{ city.geometry.y }}";
+        // zoom to point & add it to map
+        map.setView([lat, lon], 10);
+        L.marker([lat, lon]).bindPopup("<b>{{ city.name }}<br>Latitude: {{ city.geometry.y }}<br>Longitude: {{ city.geometry.x }}</b>").addTo(map);
+    }
+</script>

@@ -1,0 +1,19 @@
+{% load leaflet_tags %}
+{% leaflet_css %}
+{% leaflet_js %}
+
+<div>
+    <h2><center>District Headquaters of Nepal</center></h2>
+    {% leaflet_map "main" callback="map_init" %}
+</div>
+
+<script type="text/javascript">
+    function map_init(map, options) {
+        // get point lat and lon
+        // zoom to point & add it to map
+        var obj = JSON.parse("{{ my_geo_json | escapejs }}");
+        console.log(obj)
+        map.setView([27.700769, 85.300140], 6);
+        L.geoJSON(obj,{onEachFeature: function (feature, layer) {layer.bindPopup('<p><b>'+feature.properties.dist_name+'</b><br>Name: '+feature.properties.vdc_name+'<br> Zone: '+feature.properties.zone_name+'</p>');}}).addTo(map);
+    }
+</script>
