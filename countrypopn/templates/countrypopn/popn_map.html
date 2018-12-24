@@ -1,30 +1,15 @@
-<html>
 {% load leaflet_tags %}
+<html>
+<head>
 {% leaflet_css %}
 {% leaflet_js %}
 <style>
-.legend {
-    line-height: 18px;
-    color: #555;
-}
-.legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-}
-html, body {
-    height: 100%;
-}
-
-#map {
-    height: 100%;
-}
+ .leaflet-container { height: 80%; }
 </style>
+</head>
 <body>
-<div id="map" style="height: 610px; width:100%">
-        <h2><center>Population Density map of Nepal (people per sq. KM)</center></h2>
+<div>
+    <h2><center>Population Density map of Nepal (people per sq. KM)</center></h2>
     {% leaflet_map "main" callback="map_init" %}
 </div>
 </body>
@@ -55,28 +40,8 @@ function map_init(map, options) {
         // get point lat and lon
         // zoom to point & add it to map
         var obj = JSON.parse("{{ my_geo_json | escapejs }}");
-        map.setView([27.700769, 85.300140], 6);
+        map.setView([28.200769, 85.300140], 7);
         L.geoJson(obj, {style: style}).addTo(map);
     }
-
-    var legend = L.control({position: 'bottomright'});
-
-legend.onAdd = function (map) {
-
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-        labels = [];
-
-    // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    }
-
-    return div;
-};
-
-legend.addTo(map);
 </script>
-</html>>
+</html>
