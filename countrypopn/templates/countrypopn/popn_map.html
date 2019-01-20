@@ -49,6 +49,7 @@
 <script>
     function map_init(map, options) {
         var obj = JSON.parse("{{ my_geo_json | escapejs }}");
+        console.log(obj);
         map.setView([28.200769, 85.300140], 7);
         L.geoJson(obj).addTo(map);
 
